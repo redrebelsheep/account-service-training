@@ -1,11 +1,11 @@
-package de.bredex.account.application.api;
+package de.bredex.account.domain.model;
 
-public class AccountDto {
+public class Account {
 
     private String firstName;
     private String lastName;
 
-    public AccountDto(String firstName, String lastName) {
+    public Account(String firstName, String lastName) {
 	this.firstName = firstName;
 	this.lastName = lastName;
     }
