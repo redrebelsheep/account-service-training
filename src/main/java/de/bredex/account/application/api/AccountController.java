@@ -10,7 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController {
 
     @GetMapping("/api/v1/account")
-    public String getAccounts() {
-	return "hello world!";
+    public List<String> getAccounts() {
+	List<String> result = new ArrayList<>();
+	
+	result.add("hello");
+	result.add("world");
+	result.add("!");
+	
+	return result;
     }
 }
