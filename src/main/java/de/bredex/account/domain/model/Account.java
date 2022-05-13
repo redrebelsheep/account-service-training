@@ -4,17 +4,17 @@ import java.util.UUID;
 
 public class Account {
 
-    private UUID id;
+    private Integer id;
     private String firstName;
     private String lastName;
 
-    public Account(UUID id, String firstName, String lastName) {
+    public Account(Integer id, String firstName, String lastName) {
 	this.id = id;
 	this.firstName = firstName;
 	this.lastName = lastName;
     }
 
-    public UUID getId() {
+    public Integer getId() {
 	return id;
     }
     

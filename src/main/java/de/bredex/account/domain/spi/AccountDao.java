@@ -1,28 +1,50 @@
 package de.bredex.account.domain.spi;
 
-import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "accounts")
 public class AccountDao {
 
-    private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    
     private String firstName;
     private String lastName;
-
+    
+    public AccountDao() {}
+    
     public AccountDao(String firstName, String lastName) {
-	this.id = UUID.randomUUID();
 	this.firstName = firstName;
 	this.lastName = lastName;
     }
-    
-    public UUID getId() {
+
+    public Integer getId() {
 	return id;
     }
-
-    public String getFirstName() {
-        return firstName;
+    
+    public void setId(Integer id) {
+	this.id = id;
     }
-
+    
+    public String getFirstName() {
+	return firstName;
+    }
+    
+    public void setFirstName(String firstName) {
+	this.firstName = firstName;
+    }
+    
     public String getLastName() {
-        return lastName;
+	return lastName;
+    }
+    
+    public void setLastName(String lastName) {
+	this.lastName = lastName;
     }
 }

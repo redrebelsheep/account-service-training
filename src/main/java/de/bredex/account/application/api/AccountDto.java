@@ -1,17 +1,15 @@
 package de.bredex.account.application.api;
 
-import java.util.UUID;
-
 public class AccountDto {
 
-    private UUID id;
+    private Integer id;
     private String firstName;
     private String lastName;
     
     public AccountDto() {
     }
 
-    public AccountDto(UUID id, String firstName, String lastName) {
+    public AccountDto(Integer id, String firstName, String lastName) {
 	this.id = id;
 	this.firstName = firstName;
 	this.lastName = lastName;
@@ -24,7 +22,7 @@ public class AccountDto {
     }
    
 
-    public UUID getId() {
+    public Integer getId() {
 	return id;
     }
     

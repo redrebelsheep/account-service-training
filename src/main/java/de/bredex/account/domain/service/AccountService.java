@@ -1,7 +1,7 @@
 package de.bredex.account.domain.service;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +17,15 @@ public class AccountService {
     private AccountRepository repository;
 
     public List<Account> getAccounts() {
-	return repository.getAccounts().stream().map(dao -> new Account(dao.getId(), dao.getFirstName(), dao.getLastName()))
-		.collect(Collectors.toList());
+	List<Account> accounts = new LinkedList<>();
+	
+	repository.findAll().forEach( account -> accounts.add(new Account(account.getId(), account.getFirstName(), account.getLastName())));
+	
+	return accounts;
     }
 
     public Account createAccount(Account account) {
-	AccountDao savedAccount = repository.saveAccount(new AccountDao(account.getFirstName(), account.getLastName()));
+	AccountDao savedAccount = repository.save(new AccountDao(account.getFirstName(), account.getLastName()));
 	return new Account(savedAccount.getId(), savedAccount.getFirstName(), savedAccount.getLastName());
     }
 }
