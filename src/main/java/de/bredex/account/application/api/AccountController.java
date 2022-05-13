@@ -22,13 +22,13 @@ public class AccountController {
     @GetMapping("/api/v1/account")
     public List<AccountDto> getAccounts() {
 	return service.getAccounts().stream()
-		.map(account -> new AccountDto(account.getFirstName(), account.getLastName()))
+		.map(account -> new AccountDto(account.getNumber(), account.getFirstName(), account.getLastName()))
 		.collect(Collectors.toList());
     }
     
     @PostMapping("/api/v1/account")
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto account) {
 	Account newAccount = service.createAccount(new Account(account.getFirstName(), account.getLastName()));
-	return ResponseEntity.ok().body(new AccountDto(newAccount.getFirstName(), newAccount.getLastName()));
+	return ResponseEntity.ok().body(new AccountDto(newAccount.getNumber(), newAccount.getFirstName(), newAccount.getLastName()));
     }
 }

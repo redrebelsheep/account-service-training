@@ -13,21 +13,28 @@ import de.bredex.account.domain.spi.AccountRepository;
 public class AccountService {
 
     private AccountRepository repository;
-    
+
     public AccountService(AccountRepository repository) {
 	this.repository = repository;
     }
 
     public List<Account> getAccounts() {
 	List<Account> accounts = new LinkedList<>();
-	
-	repository.findAll().forEach( account -> accounts.add(new Account(account.getFirstName(), account.getLastName())));
-	
+
+	repository.findAll()
+		.forEach(account -> accounts.add(new Account(account.getNumber(), account.getFirstName(), account.getLastName())));
+
 	return accounts;
     }
 
     public Account createAccount(Account account) {
-	AccountDao savedAccount = repository.save(new AccountDao(account.getFirstName(), account.getLastName()));
-	return new Account(savedAccount.getFirstName(), savedAccount.getLastName());
+	String accountNumber = nextAccountNumber();
+	AccountDao savedAccount = repository.save(new AccountDao(accountNumber, account.getFirstName(), account.getLastName()));
+	return new Account(savedAccount.getNumber(), savedAccount.getFirstName(), savedAccount.getLastName());
+    }
+
+    private String nextAccountNumber() {
+	Integer nextNumber = getAccounts().stream().mapToInt(account -> Integer.valueOf(account.getNumber())).max().orElse(10000); 
+	return String.format("%04d", nextNumber + 1);
     }
 }

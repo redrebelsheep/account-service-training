@@ -2,28 +2,28 @@ package de.bredex.account.application.api;
 
 public class AccountDto {
 
-    private Integer id;
+    private String number;
     private String firstName;
     private String lastName;
     
     public AccountDto() {
     }
 
-    public AccountDto(Integer id, String firstName, String lastName) {
-	this.id = id;
+    public AccountDto(String number, String firstName, String lastName) {
+	this.number = number;
 	this.firstName = firstName;
 	this.lastName = lastName;
     }
     
     public AccountDto(String firstName, String lastName) {
-	this.id = null;
+	this.number = null;
 	this.firstName = firstName;
 	this.lastName = lastName;
     }
    
 
-    public Integer getId() {
-	return id;
+    public String getNumber() {
+	return number;
     }
     
     public String getFirstName() {

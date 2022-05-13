@@ -14,12 +14,14 @@ public class AccountDao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    private String number;
     private String firstName;
     private String lastName;
     
     public AccountDao() {}
     
-    public AccountDao(String firstName, String lastName) {
+    public AccountDao(String number, String firstName, String lastName) {
+	this.number = number;
 	this.firstName = firstName;
 	this.lastName = lastName;
     }
@@ -30,6 +32,10 @@ public class AccountDao {
     
     public void setId(Integer id) {
 	this.id = id;
+    }
+    
+    public String getNumber() {
+	return number;
     }
     
     public String getFirstName() {

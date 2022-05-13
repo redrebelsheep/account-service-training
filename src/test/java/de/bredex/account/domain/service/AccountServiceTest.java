@@ -28,8 +28,8 @@ public class AccountServiceTest {
     @Test
     public void getAccounts_returns_accounts() {
 	List<AccountDao> storedAccounts = new LinkedList<>();
-	storedAccounts.add(new AccountDao("Max", "Mustermann"));
-	storedAccounts.add(new AccountDao("Petra", "Musterfrau"));
+	storedAccounts.add(new AccountDao("000001", "Max", "Mustermann"));
+	storedAccounts.add(new AccountDao("000002", "Petra", "Musterfrau"));
 	when(repository.findAll()).thenReturn(storedAccounts);
 	
 	List<Account> accounts = service.getAccounts();
