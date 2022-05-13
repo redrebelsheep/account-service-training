@@ -21,13 +21,13 @@ public class AccountService {
     public List<Account> getAccounts() {
 	List<Account> accounts = new LinkedList<>();
 	
-	repository.findAll().forEach( account -> accounts.add(new Account(account.getId(), account.getFirstName(), account.getLastName())));
+	repository.findAll().forEach( account -> accounts.add(new Account(account.getFirstName(), account.getLastName())));
 	
 	return accounts;
     }
 
     public Account createAccount(Account account) {
 	AccountDao savedAccount = repository.save(new AccountDao(account.getFirstName(), account.getLastName()));
-	return new Account(savedAccount.getId(), savedAccount.getFirstName(), savedAccount.getLastName());
+	return new Account(savedAccount.getFirstName(), savedAccount.getLastName());
     }
 }
