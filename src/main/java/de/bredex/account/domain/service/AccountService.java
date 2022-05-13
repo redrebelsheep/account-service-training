@@ -3,7 +3,6 @@ package de.bredex.account.domain.service;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.bredex.account.domain.model.Account;
@@ -13,8 +12,11 @@ import de.bredex.account.domain.spi.AccountRepository;
 @Service
 public class AccountService {
 
-    @Autowired
     private AccountRepository repository;
+    
+    public AccountService(AccountRepository repository) {
+	this.repository = repository;
+    }
 
     public List<Account> getAccounts() {
 	List<Account> accounts = new LinkedList<>();
