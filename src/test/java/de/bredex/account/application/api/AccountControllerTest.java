@@ -50,7 +50,7 @@ public class AccountControllerTest {
     }
 
     private ResultActions createAccount(String firstName, String lastName) throws Exception {
-	AccountDto account = new AccountDto(firstName, lastName);
+	AccountRequest account = new AccountRequest(firstName, lastName);
 	byte[] input = mapper.writeValueAsBytes(account);
 
 	return mvc

@@ -21,15 +21,16 @@ public class AccountController {
     private AccountService service;
 
     @GetMapping("/api/v1/account")
-    public List<AccountDto> getAccounts() {
-	return service.getAccounts().stream()
-		.map(account -> new AccountDto(account.getNumber(), account.getFirstName(), account.getLastName()))
-		.collect(Collectors.toList());
+    public ResponseEntity<List<AccountResponse>> getAccounts() {
+	return ResponseEntity.ok(service.getAccounts().stream()
+		.map(account -> new AccountResponse(account.getNumber(), account.getFirstName(), account.getLastName()))
+		.collect(Collectors.toList()));
     }
-    
+
     @PostMapping("/api/v1/account")
-    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto account) {
-	Account newAccount = service.createAccount(new Account(account.getFirstName(), account.getLastName()));
-	return ResponseEntity.created(URI.create("/api/v1/account/" + newAccount.getNumber())).body(new AccountDto(newAccount.getNumber(), newAccount.getFirstName(), newAccount.getLastName()));
+    public ResponseEntity<AccountResponse> createAccount(@RequestBody AccountRequest request) {
+	Account newAccount = service.createAccount(new Account(request.getFirstName(), request.getLastName()));
+	return ResponseEntity.created(URI.create("/api/v1/account/" + newAccount.getNumber()))
+		.body(new AccountResponse(newAccount.getNumber(), newAccount.getFirstName(), newAccount.getLastName()));
     }
 }
