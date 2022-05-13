@@ -1,4 +1,4 @@
-package de.bredex.account.domain.logic;
+package de.bredex.account.domain.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
