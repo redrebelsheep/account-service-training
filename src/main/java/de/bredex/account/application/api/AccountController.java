@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController {
 
     @GetMapping("/api/v1/account")
-    public List<String> getAccounts() {
-	List<String> result = new ArrayList<>();
+    public List<AccountDto> getAccounts() {
+	List<AccountDto> result = new ArrayList<AccountDto>();
 	
-	result.add("hello");
-	result.add("world");
-	result.add("!");
+	result.add(new AccountDto("Timo", "Rohrberg"));
+	result.add(new AccountDto("Max", "Mustermann"));
+	result.add(new AccountDto("Petra", "Musterfrau"));
 	
 	return result;
     }
