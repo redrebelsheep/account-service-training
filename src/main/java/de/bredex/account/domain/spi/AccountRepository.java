@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface AccountRepository {
 
     public List<AccountDao> getAccounts();
+
+    public AccountDao saveAccount(AccountDao accountDao);
 }
