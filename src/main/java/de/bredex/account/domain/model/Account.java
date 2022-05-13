@@ -1,10 +1,10 @@
 package de.bredex.account.domain.model;
 
-public class Account {
+public final class Account {
 
-    private String number;
-    private String firstName;
-    private String lastName;
+    private final String number;
+    private final String firstName;
+    private final String lastName;
 
     public Account(String firstName, String lastName) {
 	this.number = null;

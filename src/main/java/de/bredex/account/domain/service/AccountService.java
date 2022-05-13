@@ -6,15 +6,15 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import de.bredex.account.domain.model.Account;
-import de.bredex.account.domain.spi.AccountDao;
+import de.bredex.account.domain.spi.AccountEntity;
 import de.bredex.account.domain.spi.AccountRepository;
 
 @Service
-public class AccountService {
+public final class AccountService {
 
     private AccountRepository repository;
 
-    public AccountService(AccountRepository repository) {
+    public AccountService(final AccountRepository repository) {
 	this.repository = repository;
     }
 
@@ -27,9 +27,9 @@ public class AccountService {
 	return accounts;
     }
 
-    public Account createAccount(Account account) {
+    public Account createAccount(final Account account) {
 	String accountNumber = nextAccountNumber();
-	AccountDao savedAccount = repository.save(new AccountDao(accountNumber, account.getFirstName(), account.getLastName()));
+	AccountEntity savedAccount = repository.save(new AccountEntity(accountNumber, account.getFirstName(), account.getLastName()));
 	return new Account(savedAccount.getNumber(), savedAccount.getFirstName(), savedAccount.getLastName());
     }
 

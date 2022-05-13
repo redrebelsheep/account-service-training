@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "accounts")
-public class AccountDao {
+public final class AccountEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +18,9 @@ public class AccountDao {
     private String firstName;
     private String lastName;
     
-    public AccountDao() {}
+    public AccountEntity() {}
     
-    public AccountDao(String number, String firstName, String lastName) {
+    public AccountEntity(String number, String firstName, String lastName) {
 	this.number = number;
 	this.firstName = firstName;
 	this.lastName = lastName;

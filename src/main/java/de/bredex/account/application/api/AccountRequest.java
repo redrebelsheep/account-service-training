@@ -1,6 +1,6 @@
 package de.bredex.account.application.api;
 
-public class AccountRequest {
+public final class AccountRequest {
 
     private final String firstName;
     private final String lastName;

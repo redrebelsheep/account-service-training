@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +14,13 @@ import de.bredex.account.domain.model.Account;
 import de.bredex.account.domain.service.AccountService;
 
 @RestController
-public class AccountController {
+public final class AccountController {
 
-    @Autowired
-    private AccountService service;
+    private final AccountService service;
+    
+    public AccountController(final AccountService service) {
+	this.service = service;
+    }
 
     @GetMapping("/api/v1/account")
     public ResponseEntity<List<AccountResponse>> getAccounts() {

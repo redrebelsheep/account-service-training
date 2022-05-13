@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.bredex.account.domain.model.Account;
-import de.bredex.account.domain.spi.AccountDao;
+import de.bredex.account.domain.spi.AccountEntity;
 import de.bredex.account.domain.spi.AccountRepository;
 
 public class AccountServiceTest {
@@ -27,9 +27,9 @@ public class AccountServiceTest {
     
     @Test
     public void getAccounts_returns_accounts() {
-	List<AccountDao> storedAccounts = new LinkedList<>();
-	storedAccounts.add(new AccountDao("000001", "Max", "Mustermann"));
-	storedAccounts.add(new AccountDao("000002", "Petra", "Musterfrau"));
+	List<AccountEntity> storedAccounts = new LinkedList<>();
+	storedAccounts.add(new AccountEntity("000001", "Max", "Mustermann"));
+	storedAccounts.add(new AccountEntity("000002", "Petra", "Musterfrau"));
 	when(repository.findAll()).thenReturn(storedAccounts);
 	
 	List<Account> accounts = service.getAccounts();
