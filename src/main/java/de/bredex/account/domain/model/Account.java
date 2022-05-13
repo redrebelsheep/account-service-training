@@ -1,7 +1,5 @@
 package de.bredex.account.domain.model;
 
-import java.util.UUID;
-
 public class Account {
 
     private Integer id;
