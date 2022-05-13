@@ -23,6 +23,7 @@ public class AccountControllerTest {
     @Test
     public void GET_returns_accounts() throws Exception {
 	mvc.perform(get("/api/v1/account").contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().is(HttpStatus.OK.value()));
+		.andExpect(status().is(HttpStatus.OK.value()))
+		.andExpect(jsonPath("$.*", hasSize(3)));
     }
 }
