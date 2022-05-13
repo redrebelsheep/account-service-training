@@ -4,4 +4,4 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AccountRepository extends CrudRepository<AccountDao, String>{}
+public interface AccountRepository extends CrudRepository<AccountDao, Integer>{}
