@@ -1,5 +1,6 @@
 package de.bredex.account.application.api;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -21,9 +22,15 @@ public class AccountControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void GET_returns_accounts() throws Exception {
+    public void GET_returns_account_details() throws Exception {
 	mvc.perform(get("/api/v1/account").contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().is(HttpStatus.OK.value()))
-		.andExpect(jsonPath("$.*", hasSize(3)));
+		.andExpect(jsonPath("$.*", hasSize(3)))
+		.andExpect(jsonPath("$[0].firstName", is("Timo")))
+		.andExpect(jsonPath("$[0].lastName", is("Rohrberg")))
+		.andExpect(jsonPath("$[1].firstName", is("Max")))
+		.andExpect(jsonPath("$[1].lastName", is("Mustermann")))
+		.andExpect(jsonPath("$[2].firstName", is("Petra")))
+		.andExpect(jsonPath("$[2].lastName", is("Musterfrau")));
     }
 }
