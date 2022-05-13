@@ -45,7 +45,7 @@ public class AccountControllerTest {
 
     @Test
     public void POST_creates_new_account() throws Exception {
-	createAccount("Timo", "Rohrberg").andExpect(jsonPath("$.firstName", is("Timo")))
+	createAccount("Timo", "Rohrberg").andExpect(status().is(HttpStatus.CREATED.value())).andExpect(jsonPath("$.firstName", is("Timo")))
 		.andExpect(jsonPath("$.lastName", is("Rohrberg")));
     }
 
@@ -55,7 +55,6 @@ public class AccountControllerTest {
 
 	return mvc
 		.perform(post("/api/v1/account").contentType(MediaType.APPLICATION_JSON)
-			.accept(MediaType.APPLICATION_JSON).content(input))
-		.andExpect(status().is(HttpStatus.OK.value()));
+			.accept(MediaType.APPLICATION_JSON).content(input));
     }
 }

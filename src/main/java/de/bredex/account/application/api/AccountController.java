@@ -1,5 +1,6 @@
 package de.bredex.account.application.api;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,6 @@ public class AccountController {
     @PostMapping("/api/v1/account")
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto account) {
 	Account newAccount = service.createAccount(new Account(account.getFirstName(), account.getLastName()));
-	return ResponseEntity.ok().body(new AccountDto(newAccount.getNumber(), newAccount.getFirstName(), newAccount.getLastName()));
+	return ResponseEntity.created(URI.create("/api/v1/account/" + newAccount.getNumber())).body(new AccountDto(newAccount.getNumber(), newAccount.getFirstName(), newAccount.getLastName()));
     }
 }
