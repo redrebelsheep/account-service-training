@@ -12,15 +12,15 @@ public final class AccountResponse {
 	this.lastName = lastName;
     }
     
-    public String getNumber() {
+    public final String getNumber() {
 	return number;
     }
     
-    public String getFirstName() {
+    public final String getFirstName() {
 	return firstName;
     }
     
-    public String getLastName() {
+    public final String getLastName() {
 	return lastName;
     }
 }

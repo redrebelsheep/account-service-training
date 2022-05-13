@@ -10,11 +10,11 @@ public final class AccountRequest {
 	this.lastName = lastName;
     }
     
-    public String getFirstName() {
+    public final String getFirstName() {
 	return firstName;
     }
     
-    public String getLastName() {
+    public final String getLastName() {
 	return lastName;
     }
 }
