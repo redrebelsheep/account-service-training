@@ -50,8 +50,8 @@ public class AccountControllerTest {
     }
 
     private ResultActions createAccount(String firstName, String lastName) throws Exception {
-	AccountRequest account = new AccountRequest(firstName, lastName);
-	byte[] input = mapper.writeValueAsBytes(account);
+	AccountRequest request = new AccountRequest(firstName, lastName);
+	byte[] input = mapper.writeValueAsBytes(request);
 
 	return mvc
 		.perform(post("/api/v1/account").contentType(MediaType.APPLICATION_JSON)
