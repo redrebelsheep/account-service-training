@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.bredex.account.domain.model.Account;
 import de.bredex.account.domain.service.AccountService;
-import de.bredex.account.domain.service.AccountService.NoSuchAccountException;
 
 @RestController
 public final class AccountController {
@@ -32,7 +31,7 @@ public final class AccountController {
     }
 
     @GetMapping("/api/v1/account/{number}")
-    public final ResponseEntity<AccountResponse> getAccount(@PathVariable final String number) throws NoSuchAccountException {
+    public final ResponseEntity<AccountResponse> getAccount(@PathVariable final String number) {
 	final Account account = service.getAccount(number);
 
 	return ResponseEntity

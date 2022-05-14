@@ -3,8 +3,6 @@ package de.bredex.account.domain.service;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -30,7 +28,7 @@ public final class AccountService {
 	return Collections.unmodifiableList(accounts);
     }
 
-    public Account getAccount(final String number) throws NoSuchAccountException {
+    public Account getAccount(final String number) {
 	final AccountEntity entity = repository.findByNumber(number).orElseThrow(() -> new NoSuchAccountException(number));
 
 	return new Account(entity.getNumber(), entity.getFirstName(), entity.getLastName());
@@ -49,7 +47,7 @@ public final class AccountService {
 	return String.format("%04d", nextNumber + 1);
     }
     
-    public class NoSuchAccountException extends Exception {
+    public class NoSuchAccountException extends RuntimeException {
 	
 	private static final long serialVersionUID = 8348460552161487667L;
 

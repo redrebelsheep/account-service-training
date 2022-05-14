@@ -62,6 +62,12 @@ public class AccountControllerTest {
     }
 
     @Test
+    public void GET_returns_NOT_FOUND_for_non_existing_account() throws Exception {
+	mvc.perform(get("/api/v1/account/10001").contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().is(HttpStatus.NOT_FOUND.value()));
+    }
+
+    @Test
     public void POST_creates_new_account() throws Exception {
 	createAccount("Timo", "Rohrberg").andExpect(status().is(HttpStatus.CREATED.value()))
 		.andExpect(jsonPath("$.firstName", is("Timo"))).andExpect(jsonPath("$.lastName", is("Rohrberg")));

@@ -16,6 +16,8 @@
 	<description>Service for managing user accounts</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<zalando.problem.version>0.27.1</zalando.problem.version>
+		<zalando.problem.web.version>0.27.0</zalando.problem.web.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -30,6 +32,16 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>problem</artifactId>
+			<version>${zalando.problem.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>problem-spring-web</artifactId>
+			<version>${zalando.problem.web.version}</version>
 		</dependency>
 
 		<dependency>

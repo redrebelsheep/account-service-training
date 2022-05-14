@@ -1,6 +1,7 @@
 package de.bredex.account.domain.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -41,12 +42,19 @@ public class AccountServiceTest {
     }
     
     @Test
-    public void getAccount_returns_account() throws NoSuchAccountException {
+    public void getAccount_returns_account() {
 	final AccountEntity entity = new AccountEntity("10001", "Max", "Mustermann");
 	when(repository.findByNumber(any())).thenReturn(Optional.of(entity));
 	
 	Account account = service.getAccount("10001");
 	
 	assertThat(account).isNotNull();
+    }
+    
+    @Test
+    public void getAccount_throws_exception_for_non_existing_account() {
+	when(repository.findByNumber(any())).thenReturn(Optional.empty());
+	
+	assertThrows(NoSuchAccountException.class, () -> service.getAccount("10001"));
     }
 }
