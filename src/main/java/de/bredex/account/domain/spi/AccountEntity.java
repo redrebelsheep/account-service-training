@@ -26,35 +26,35 @@ public final class AccountEntity {
 	this.lastName = lastName;
     }
 
-    public final Integer getId() {
+    public Integer getId() {
 	return id;
     }
     
-    public final void setId(final Integer id) {
+    public void setId(final Integer id) {
 	this.id = id;
     }
     
-    public final String getNumber() {
+    public String getNumber() {
 	return number;
     }
     
-    public final void setNumber(final String number) {
+    public void setNumber(final String number) {
 	this.number = number;
     }
     
-    public final String getFirstName() {
+    public String getFirstName() {
 	return firstName;
     }
     
-    public final void setFirstName(final String firstName) {
+    public void setFirstName(final String firstName) {
 	this.firstName = firstName;
     }
     
-    public final String getLastName() {
+    public String getLastName() {
 	return lastName;
     }
     
-    public final void setLastName(final String lastName) {
+    public void setLastName(final String lastName) {
 	this.lastName = lastName;
     }
 }
