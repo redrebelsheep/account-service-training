@@ -3,6 +3,8 @@ package de.bredex.account.domain.service;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -22,20 +24,37 @@ public final class AccountService {
     public final List<Account> getAccounts() {
 	final List<Account> accounts = new LinkedList<>();
 
-	repository.findAll()
-		.forEach(account -> accounts.add(new Account(account.getNumber(), account.getFirstName(), account.getLastName())));
+	repository.findAll().forEach(account -> accounts
+		.add(new Account(account.getNumber(), account.getFirstName(), account.getLastName())));
 
 	return Collections.unmodifiableList(accounts);
     }
 
+    public Account getAccount(final String number) throws NoSuchAccountException {
+	final AccountEntity entity = repository.findByNumber(number).orElseThrow(() -> new NoSuchAccountException(number));
+
+	return new Account(entity.getNumber(), entity.getFirstName(), entity.getLastName());
+    }
+
     public final Account createAccount(final Account account) {
 	final String accountNumber = nextAccountNumber();
-	final AccountEntity savedAccount = repository.save(new AccountEntity(accountNumber, account.getFirstName(), account.getLastName()));
+	final AccountEntity savedAccount = repository
+		.save(new AccountEntity(accountNumber, account.getFirstName(), account.getLastName()));
 	return new Account(savedAccount.getNumber(), savedAccount.getFirstName(), savedAccount.getLastName());
     }
 
     private final String nextAccountNumber() {
-	final Integer nextNumber = getAccounts().stream().mapToInt(account -> Integer.valueOf(account.getNumber())).max().orElse(10000); 
+	final Integer nextNumber = getAccounts().stream().mapToInt(account -> Integer.valueOf(account.getNumber()))
+		.max().orElse(10000);
 	return String.format("%04d", nextNumber + 1);
+    }
+    
+    public class NoSuchAccountException extends Exception {
+	
+	private static final long serialVersionUID = 8348460552161487667L;
+
+	public NoSuchAccountException(final String number) {
+	    super("No account found with number '" + number + "'");
+	}
     }
 }
