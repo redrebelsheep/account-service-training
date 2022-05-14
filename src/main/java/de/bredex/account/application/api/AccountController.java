@@ -31,7 +31,7 @@ public final class AccountController {
 
     @PostMapping("/api/v1/account")
     public final ResponseEntity<AccountResponse> createAccount(@RequestBody AccountRequest request) {
-	Account newAccount = service.createAccount(new Account(request.getFirstName(), request.getLastName()));
+	final Account newAccount = service.createAccount(new Account(request.getFirstName(), request.getLastName()));
 	return ResponseEntity.created(URI.create("/api/v1/account/" + newAccount.getNumber()))
 		.body(new AccountResponse(newAccount.getNumber(), newAccount.getFirstName(), newAccount.getLastName()));
     }

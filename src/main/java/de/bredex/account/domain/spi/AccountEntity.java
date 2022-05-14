@@ -20,37 +20,41 @@ public final class AccountEntity {
     
     public AccountEntity() {}
     
-    public AccountEntity(String number, String firstName, String lastName) {
+    public AccountEntity(final String number, final String firstName, final String lastName) {
 	this.number = number;
 	this.firstName = firstName;
 	this.lastName = lastName;
     }
 
-    public Integer getId() {
+    public final Integer getId() {
 	return id;
     }
     
-    public void setId(Integer id) {
+    public final void setId(final Integer id) {
 	this.id = id;
     }
     
-    public String getNumber() {
+    public final String getNumber() {
 	return number;
     }
     
-    public String getFirstName() {
+    public final void setNumber(final String number) {
+	this.number = number;
+    }
+    
+    public final String getFirstName() {
 	return firstName;
     }
     
-    public void setFirstName(String firstName) {
+    public final void setFirstName(final String firstName) {
 	this.firstName = firstName;
     }
     
-    public String getLastName() {
+    public final String getLastName() {
 	return lastName;
     }
     
-    public void setLastName(String lastName) {
+    public final void setLastName(final String lastName) {
 	this.lastName = lastName;
     }
 }
