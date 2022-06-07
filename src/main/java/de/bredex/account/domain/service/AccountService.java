@@ -16,43 +16,44 @@ public final class AccountService {
     private final AccountRepository repository;
 
     public AccountService(final AccountRepository repository) {
-	this.repository = repository;
+        this.repository = repository;
     }
 
     public final List<Account> getAccounts() {
-	final List<Account> accounts = new LinkedList<>();
+        final List<Account> accounts = new LinkedList<>();
 
-	repository.findAll().forEach(account -> accounts
-		.add(new Account(account.getNumber(), account.getFirstName(), account.getLastName())));
+        repository.findAll().forEach(account -> accounts
+            .add(new Account(account.getNumber(), account.getFirstName(), account.getLastName())));
 
-	return Collections.unmodifiableList(accounts);
+        return Collections.unmodifiableList(accounts);
     }
 
     public Account getAccount(final String number) {
-	final AccountEntity entity = repository.findByNumber(number).orElseThrow(() -> new NoSuchAccountException(number));
+        final AccountEntity entity = repository.findByNumber(number)
+            .orElseThrow(() -> new NoSuchAccountException(number));
 
-	return new Account(entity.getNumber(), entity.getFirstName(), entity.getLastName());
+        return new Account(entity.getNumber(), entity.getFirstName(), entity.getLastName());
     }
 
     public final Account createAccount(final Account account) {
-	final String accountNumber = nextAccountNumber();
-	final AccountEntity savedAccount = repository
-		.save(new AccountEntity(accountNumber, account.getFirstName(), account.getLastName()));
-	return new Account(savedAccount.getNumber(), savedAccount.getFirstName(), savedAccount.getLastName());
+        final String accountNumber = nextAccountNumber();
+        final AccountEntity savedAccount = repository
+            .save(new AccountEntity(accountNumber, account.getFirstName(), account.getLastName()));
+        return new Account(savedAccount.getNumber(), savedAccount.getFirstName(), savedAccount.getLastName());
     }
 
     private final String nextAccountNumber() {
-	final Integer nextNumber = getAccounts().stream().mapToInt(account -> Integer.valueOf(account.getNumber()))
-		.max().orElse(10000);
-	return String.format("%04d", nextNumber + 1);
+        final Integer nextNumber = getAccounts().stream().mapToInt(account -> Integer.valueOf(account.getNumber()))
+            .max().orElse(10000);
+        return String.format("%04d", nextNumber + 1);
     }
-    
-    public class NoSuchAccountException extends RuntimeException {
-	
-	private static final long serialVersionUID = 8348460552161487667L;
 
-	public NoSuchAccountException(final String number) {
-	    super("No account found with number '" + number + "'");
-	}
+    public class NoSuchAccountException extends RuntimeException {
+
+        private static final long serialVersionUID = 8348460552161487667L;
+
+        public NoSuchAccountException(final String number) {
+            super("No account found with number '" + number + "'");
+        }
     }
 }
